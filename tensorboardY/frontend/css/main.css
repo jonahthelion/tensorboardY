@@ -1,0 +1,36 @@
+video {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+}
+
+div.card {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+textarea.tyarg-writing {
+  height: 100%;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.tyarg-hidden {
+  display: none;
+}
+
+.ty-warning {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+img { cursor:zoom-in; }
+img:-webkit-full-screen { cursor:zoom-out; }
+img:-moz-full-screen { cursor:zoom-out; }
+img:-ms-fullscreen { cursor:zoom-out; }
+img:fullscreen { cursor:zoom-out; }

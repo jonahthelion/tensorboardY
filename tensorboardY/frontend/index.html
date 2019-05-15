@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+
+    <title>tensorboardY</title>
+  </head>
+  <body>
+
+    <!-- The actual web page -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Opening -->
+        <button type="button" class="btn btn-primary btn-lg btn-block sticky-top" id="ty-runit">
+          {{ title }} &#8594;
+        </button>
+        <div class="col-sm-6">
+          <!-- widgets -->
+          {% for tyid, tyarg in enumerate(inputs) %}        
+            <div class="card">
+              <div class="card-header tyarg-header" id={{ tyid }}-tyarg-header>
+                {{ tyarg.name }}
+              </div>
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-7">
+                    {% if len(tyarg.image_list) > 0 %}
+                    <select class="form-control ty-ex-img" id={{ tyid }}-ty-ex-img>
+                      <option selected disabled value='ty-nothing'>Choose an image</option>
+                      {% for ex in tyarg.image_names %}
+                        <option>{{ ex }}</option>
+                      {% end %}
+                    </select>
+                    {% end %}
+                    {% if len(tyarg.text_list) > 0 %}
+                    <select class="form-control ty-ex-txt" id={{ tyid }}-ty-ex-txt>
+                      <option selected disabled value='ty-nothing'>Choose a text sample</option>
+                      {% for ex in tyarg.text_names %}
+                        <option>{{ ex }}</option>
+                      {% end %}
+                    </select>
+                    {% end %}
+                    {% if len(tyarg.option_list) > 0 %}
+                    <select class="form-control ty-options" id={{ tyid }}-ty-options>
+                      <option selected disabled value='ty-nothing'>Choose an option</option>
+                      {% for ex in tyarg.option_names %}
+                        <option>{{ ex }}</option>
+                      {% end %}
+                    </select>
+                    {% end %}
+                    {% if tyarg.text_input %}
+                    <div class="input-group">
+                      <textarea class="form-control tyarg-text-in" placeholder="Type here" id={{ tyid }}-tyarg-text-in aria-label="With textarea"></textarea>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary tyarg-write-btn" id={{ tyid }}-tyarg-write-btn type="button">&#8594;</button>
+                      </div>
+                    </div>
+                    {% end %}
+                    {% if tyarg.image_upload %}
+                    <label class="btn btn-outline-primary tyarg-img-upload-btn" id={{ tyid }}-tyarg-img-upload-btn>
+                      Upload an image<input class="tyarg-img-upload" type="file" accept="image/*" style="display: none;" id= {{ tyid }}-tyarg-img-upload>
+                    </label>
+                    {% end %}
+                    {% if tyarg.camera %}
+                    <label class="btn btn-outline-primary tyarg-img-capture" id={{ tyid }}-tyarg-img-capture>Take a picture</label>
+                    {% end %}
+                    {% if tyarg.boolean %}
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                      <button type="button" class="btn btn-outline-primary tybool" id={{tyid}}-tybool-true>True</button>
+                      <button type="button" class="btn btn-outline-primary tybool" id={{tyid}}-tybool-false>False</button>
+                    </div>
+                    {% end %}
+                    {% if tyarg.slider is not None %}
+                      {% if tyarg.slider_default is not None %}
+                        <input type="range" min={{tyarg.slider[0]}} max={{tyarg.slider[1]}} step={{tyarg.slider[2]}} value={{tyarg.slider_default}} class="custom-range ty-slider" id={{tyid}}-ty-slider >
+                      {% else %}
+                        <input type="range" min={{tyarg.slider[0]}} max={{tyarg.slider[1]}} step={{tyarg.slider[2]}} value={{tyarg.slider[0]}} class="custom-range ty-slider" id={{tyid}}-ty-slider >
+                      {% end %}
+                    {% end %}
+                  </div>
+                  <div class="col-5">
+                    <textarea class="form-control tyarg-writing tyarg-hidden" placeholder="" id={{ tyid }}-tyarg-writing readonly>
+                      <button class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</button>
+                    </textarea>
+                    <img src="" class="card-img tyarg-img tyarg-hidden" data-toggle="tooltip" title="" id={{ tyid }}-tyarg-img>
+                    <div class="ty-warning tyarg-hidden" id={{ tyid }}-ty-warning>Choose an input to the left</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% end %}
+        </div>
+
+        <div class="col-sm-6">
+          <div class="card tyarg-hidden" id="ty-output-card">
+            <div class="card-body" id="ty-output">
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Video capture -->
+    <canvas id="ty-canvas" style="display: none;"></canvas>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Take a picture</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <video id="ty-player" class="centered" autoplay></video>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="img-capture-btn">Click</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>
