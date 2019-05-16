@@ -10,6 +10,6 @@ This library seeks to automate the creation of ML demo websites like
 * [FUNIT](https://nvlabs.github.io/FUNIT/petswap.html)
 
 ## Examples
-<img src="https://github.com/jonahthelion/tensorboardY/blob/master/imgs/simple_example_site.png" width="200" />
+<img src="https://github.com/jonahthelion/tensorboardY/blob/master/imgs/simple_example_site.png" width="500" />
 
 `python examples/simple_example.py`
