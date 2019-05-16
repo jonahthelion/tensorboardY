@@ -1,35 +1,18 @@
 import tensorboardY as ty
+import matplotlib.pyplot as plt
+import os
+from glob import glob
 
 
-def forward(z, z2):
-    return z
+def forward(x, title):
+    plt.imshow(x)
+    plt.title(title)
+    return plt.gcf()
 
 
-inputs = [ty.Widget(var='z', name='something new',
-          camera=True,
-          image_upload=True,
-          image_list=['../imgs/curve.jpg'],
-          image_names=['helloooooo'],
-          text_input=True,
-          text_list=['here is one', 2324.4],
-          text_names=['ok ok', 45],
-          option_list=['something', 45566],
-          option_names=['anotha oneeeee', 'yet another one'],
-          boolean=True,
-          slider=(0, 10, 1), slider_default=4),
-          ty.Widget(var='z2', name='something new',
-          camera=True,
-          image_upload=True,
-          image_list=['../imgs/curve.jpg'],
-          image_names=['helloooooo'],
-          text_input=True,
-          text_list=['here is one', 2324.4],
-          text_names=['ok ok', 45],
-          option_list=['something', 45566],
-          option_names=['anotha oneeeee', 'yet another one'],
-          boolean=True,
-          slider=(0, 10, 1), slider_default=4)
-          ]
+image_list = glob(os.path.join(os.path.os.path.dirname(__file__), '../imgs/*.jpg'))
 
+inputs = [ty.Image(var='x', exs=image_list),
+          ty.Text(var='title', exs=["Here's an image!", "EXAMPLE"])]
 
 ty.show(forward, inputs)

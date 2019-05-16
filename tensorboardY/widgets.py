@@ -41,8 +41,11 @@ class Widget(object):
         self.text_list = [ex for ex in text_list]
 
         if text_names is None:
-            text_names = ["Text {}".format(i)
-                          for i in range(len(self.text_list))]
+            len_limit = 35
+            text_names = [ex for ex in self.text_list]
+            for i, ex in enumerate(text_names):
+                if len(ex) > len_limit:
+                    text_names[i] = "{}...".format(ex[:(len_limit - 3)])
         self.text_names = [name for name in text_names]
         assert(len(self.text_list) == len(self.text_names)),\
             "{} != {}".format(len(self.text_list),
@@ -92,3 +95,24 @@ class Widget(object):
                 return True
             return False
         assert(False), 'arg kind {} not understood'.format(arg['kind'])
+
+
+class Image(Widget):
+    def __init__(self, var, name="Image",
+                 camera=True,
+                 image_upload=True,
+                 exs=[], ex_names=None, **kwargs):
+        super(Image, self).__init__(var=var, name=name,
+                                    camera=camera, image_upload=image_upload,
+                                    image_list=exs, image_names=ex_names,
+                                    **kwargs)
+
+
+class Text(Widget):
+    def __init__(self, var, name="Text",
+                 text_input=True,
+                 exs=[], ex_names=None, **kwargs):
+        super(Text, self).__init__(var=var, name=name,
+                                   text_input=text_input,
+                                   text_list=exs, text_names=ex_names,
+                                   **kwargs)
