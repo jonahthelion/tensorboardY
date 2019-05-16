@@ -18,7 +18,7 @@ URL = 'https://github.com/jonahthelion/tensorboardY'
 EMAIL = 'jonahphilion@gmail.com'
 AUTHOR = 'Jonah Philion'
 REQUIRES_PYTHON = '>=2.5.0'
-VERSION = '0.1.3'
+VERSION = '0.1.5'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -88,7 +88,7 @@ class UploadCommand(Command):
         self.status('Pushing git tags…')
         os.system('git tag v{0}'.format(about['__version__']))
         os.system('git push --tags')
-        
+
         sys.exit()
 
 
