@@ -9,20 +9,20 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import setup, Command
+from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'tensorboardY'
-DESCRIPTION = 'Interact with ML models in the browser so that we can better understand their strengths and weaknesses on real world data.'
+DESCRIPTION = 'Interact with ML models in the browser so that we can better understand their strengths and weaknesses on real world data'
 URL = 'https://github.com/jonahthelion/tensorboardY'
 EMAIL = 'jonahphilion@gmail.com'
 AUTHOR = 'Jonah Philion'
-REQUIRES_PYTHON = '>=2.6.0'
-VERSION = '0.1.0'
+REQUIRES_PYTHON = '>=2.5.0'
+VERSION = '0.1.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'tornado', 'simplejson', 'Pillow', 'matplotlib'
+    'tornado', 'simplejson', 'Pillow',
 ]
 
 # What packages are optional?
@@ -40,7 +40,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 try:
-    with io.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
+    with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = '\n' + f.read()
 except FileNotFoundError:
     long_description = DESCRIPTION
@@ -88,7 +88,7 @@ class UploadCommand(Command):
         self.status('Pushing git tags…')
         os.system('git tag v{0}'.format(about['__version__']))
         os.system('git push --tags')
-
+        
         sys.exit()
 
 
@@ -103,9 +103,9 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    # packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['tensorboardY'],
+    # py_modules=['mypackage'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
