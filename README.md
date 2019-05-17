@@ -1,7 +1,7 @@
 # tensorboardY
-The easier it is to interact with ML models, the faster we'll be able to figure out their current limitations. The goal of this library is to make it as easy as possible to build demo websites for ML.
+The goal of this library is to accelerate ML research by making it as easy as possible to demo ML algorithms in the browser. The easier it is to interact with ML models, the faster we can determine their current limitations.
 
-This library seeks to automate the creation of successful ML demo websites like
+This library seeks to automate the creation of cool ML demo websites like
 
 * [Megadepth](http://megadepthdemo.pythonanywhere.com/)
 * [Talk to transformer](https://talktotransformer.com/?ref=producthunt)
