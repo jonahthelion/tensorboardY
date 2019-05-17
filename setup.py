@@ -18,7 +18,7 @@ URL = 'https://github.com/jonahthelion/tensorboardY'
 EMAIL = 'jonahphilion@gmail.com'
 AUTHOR = 'Jonah Philion'
 REQUIRES_PYTHON = '>=2.5.0'
-VERSION = '0.1.5'
+VERSION = '0.1.6'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

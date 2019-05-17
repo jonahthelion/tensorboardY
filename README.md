@@ -9,6 +9,9 @@ This library seeks to automate the creation of successful ML demo websites like
 * [Wayve demo](http://perception.wayve.ai/)
 * [FUNIT](https://nvlabs.github.io/FUNIT/petswap.html)
 
+## Install
+`pip install tensorboardY`
+
 ## Examples
 * `python examples/simple_example.py`
 
