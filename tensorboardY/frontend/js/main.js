@@ -215,6 +215,9 @@ $( ".tyarg-img-capture" ).each(function( index ) {
   obj.tyid = obj.id.split("-")[0]
   obj.tydisplayid = `${obj.tyid}-tyarg-img`;
   obj.newimg = null;
+  if (navigator.mediaDevices == null) {
+    $(obj).addClass('disabled');
+  }
   obj.tyreset = () => { };
   obj.tydisplay = () => {
     document.getElementById(obj.tydisplayid).src = obj.newimg;
@@ -224,6 +227,8 @@ $( ".tyarg-img-capture" ).each(function( index ) {
     return {'kind': 'img', 'data': getBase64Image(document.getElementById(obj.tydisplayid))}
   }
   obj.addEventListener('click', function (e) {
+    if ($(obj).hasClass('disabled'))
+      return;
     current_capture_id = obj.tyid
     $('#exampleModalCenter').modal('show');
   });
@@ -282,6 +287,10 @@ $('.ty-warning').each(function ( index ) {
 })
 
 $("#ty-runit").click ( function (evt) {
+  let runbtn = this;
+  if ($(runbtn).hasClass('disabled')) {
+    return;
+  }
   let all_set = true;
   let prep_args = [];
   for (tyid in id2current) {
@@ -296,6 +305,8 @@ $("#ty-runit").click ( function (evt) {
   }
   if (all_set) {
     cmd = {'cmd': 'arg_delivery', 'args': prep_args};
+    let prev_interior = $(runbtn).html();
+    $(runbtn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
     axios.post('', cmd)
       .then(function (res) {
         if (res.data.kind == 'html') {
@@ -318,6 +329,9 @@ $("#ty-runit").click ( function (evt) {
       .catch(function (error) {
         console.log('model forward pass fail!!!');
         console.log(error);
+      })
+      .finally(function () {
+        $(runbtn).html(prev_interior).removeClass('disabled');
       })
   }
 });

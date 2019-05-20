@@ -1,3 +1,5 @@
+import matplotlib as mpl
+mpl.use('Agg')
 import tensorboardY as ty
 import matplotlib.pyplot as plt
 import os
