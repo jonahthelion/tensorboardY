@@ -21,7 +21,7 @@ REQUIRES_PYTHON = '>=2.5.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'tornado', 'simplejson', 'Pillow',
+    'tornado', 'simplejson', 'Pillow', 'matplotlib',
 ]
 
 # What packages are optional?
