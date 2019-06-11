@@ -1,7 +1,5 @@
 # tensorboardY
-The goal of this library is to accelerate ML research by making it as easy as possible to demo ML algorithms in the browser. The easier it is to interact with ML models, the faster we can determine their current limitations.
-
-This library seeks to automate the creation of cool ML demo websites like
+The easier it is to interact with ML models, the faster we can determine their current limitations. This library seeks to automate the creation of cool ML demo websites like
 
 * [Megadepth](http://megadepthdemo.pythonanywhere.com/)
 * [Talk to transformer](https://talktotransformer.com/?ref=producthunt)
@@ -9,7 +7,7 @@ This library seeks to automate the creation of cool ML demo websites like
 * [Wayve demo](http://perception.wayve.ai/)
 * [FUNIT](https://nvlabs.github.io/FUNIT/petswap.html)
 
-Documentation generated using [pdoc3](https://pdoc3.github.io/pdoc/) is [here](https://jonahthelion.github.io/tensorboardY/).
+Documentation is [here](https://jonahthelion.github.io/tensorboardY/) (generated using [pdoc3](https://pdoc3.github.io/pdoc/)).
 The github repo is [here](https://github.com/jonahthelion/tensorboardY).
 
 ## Install
