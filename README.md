@@ -10,6 +10,7 @@ This library seeks to automate the creation of cool ML demo websites like
 * [FUNIT](https://nvlabs.github.io/FUNIT/petswap.html)
 
 Documentation generated using [pdoc3](https://pdoc3.github.io/pdoc/) is [here](https://jonahthelion.github.io/tensorboardY/).
+The github repo is [here](https://github.com/jonahthelion/tensorboardY).
 
 ## Install
 `pip install tensorboardY`
