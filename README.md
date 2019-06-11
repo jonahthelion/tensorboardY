@@ -9,6 +9,8 @@ This library seeks to automate the creation of cool ML demo websites like
 * [Wayve demo](http://perception.wayve.ai/)
 * [FUNIT](https://nvlabs.github.io/FUNIT/petswap.html)
 
+Documentation generated using [pdoc3](https://pdoc3.github.io/pdoc/) is [here](https://jonahthelion.github.io/tensorboardY/).
+
 ## Install
 `pip install tensorboardY`
 
@@ -55,4 +57,4 @@ ty.show(forward, inputs)
 <img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/full_example_site.png" width="800" />
 
 # Documentation
-Documentation generated using [pdoc3](https://pdoc3.github.io/pdoc/)
+
