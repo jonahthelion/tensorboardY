@@ -33,20 +33,20 @@ class Widget(object):
     Args:
         var (str): The function variable name this widget represents
         name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        image_list (list[str]): list of file paths to images
-        image_names (list[str]): list of names the client will see
-        text_input (bool): allow the user to input text
-        text_list (list[str]): list of example strings
-        text_names (list[str]): the names the client will see
-        option_list (list[str]): list of options. &#34;Options&#34; differ from &#34;texts&#34;
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        image_list (list[str]): List of file paths to images
+        image_names (list[str]): List of names the client will see
+        text_input (bool): Allow the user to input text
+        text_list (list[str]): List of example strings
+        text_names (list[str]): The names the client will see
+        option_list (list[str]): List of options. &#34;Options&#34; differ from &#34;texts&#34;
             in that they won&#39;t be previewed to the client
-        option_names (list[str]): list of names the client will see
-        boolean (bool): allow the user to input a boolean
-        slider (tuple): tuple (min, max, increment) so for instance (0,1,.1)
+        option_names (list[str]): List of names the client will see
+        boolean (bool): Allow the user to input a boolean
+        slider (tuple): Tuple (min, max, increment) so for instance (0,1,.1)
             would allow the user to choose 0, 0.1, 0.2, ..., 1.0.
-        slider_default (float): the initial position of the slider
+        slider_default (float): The initial position of the slider
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Widget&#34;,
                  camera=False,
@@ -143,14 +143,15 @@ class Widget(object):
 
 class Image(Widget):
     r&#34;&#34;&#34;
-    A template to build arguments that you know should always be images.
+    A template to build a `ty.Widget` for arguments that you know should
+    always be images.
     Args:
-        var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        exs (list[str]): list of file paths to images
-        ex_names (list[str]): list of names the client will see
+        var (str): The name of the argument that this widget represents
+        name (str): The title the user sees for this widget
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        exs (list[str]): List of file paths to images
+        ex_names (list[str]): The names for the images that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Image&#34;,
                  camera=True,
@@ -167,10 +168,10 @@ class Text(Widget):
     A template to build arguments that you know should always be text.
     Args:
         var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        text_input (bool): allow the user to input text
-        exs (list[str]): list of example strings
-        ex_names (list[str]): the names the client will see
+        name (str): The title the user sees for this widget
+        text_input (bool): Allow the user to input text
+        exs (list[str]): List of example strings
+        ex_names (list[str]): The names for the texts that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Text&#34;,
                  text_input=True,
@@ -195,34 +196,36 @@ class Text(Widget):
 <span>(</span><span>var, name='Image', camera=True, image_upload=True, exs=[], ex_names=None, **kwargs)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>A template to build arguments that you know should always be images.</p>
+<section class="desc"><p>A template to build a <code>ty.Widget</code> for arguments that you know should
+always be images.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>var</code></strong> :&ensp;<code>str</code></dt>
-<dd>The function variable name this widget represents</dd>
+<dd>The name of the argument that this widget represents</dd>
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
-<dd>The title of this widget</dd>
+<dd>The title the user sees for this widget</dd>
 <dt><strong><code>camera</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to take pictures</dd>
+<dd>Allow the user to take pictures</dd>
 <dt><strong><code>image_upload</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow user to upload images</dd>
+<dd>Allow user to upload images</dd>
 <dt><strong><code>exs</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of file paths to images</dd>
+<dd>List of file paths to images</dd>
 <dt><strong><code>ex_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>The names for the images that the user sees</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">class Image(Widget):
     r&#34;&#34;&#34;
-    A template to build arguments that you know should always be images.
+    A template to build a `ty.Widget` for arguments that you know should
+    always be images.
     Args:
-        var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        exs (list[str]): list of file paths to images
-        ex_names (list[str]): list of names the client will see
+        var (str): The name of the argument that this widget represents
+        name (str): The title the user sees for this widget
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        exs (list[str]): List of file paths to images
+        ex_names (list[str]): The names for the images that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Image&#34;,
                  camera=True,
@@ -249,13 +252,13 @@ class Text(Widget):
 <dt><strong><code>var</code></strong> :&ensp;<code>str</code></dt>
 <dd>The function variable name this widget represents</dd>
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
-<dd>The title of this widget</dd>
+<dd>The title the user sees for this widget</dd>
 <dt><strong><code>text_input</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input text</dd>
+<dd>Allow the user to input text</dd>
 <dt><strong><code>exs</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of example strings</dd>
+<dd>List of example strings</dd>
 <dt><strong><code>ex_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>the names the client will see</dd>
+<dd>The names for the texts that the user sees</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
@@ -264,10 +267,10 @@ class Text(Widget):
     A template to build arguments that you know should always be text.
     Args:
         var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        text_input (bool): allow the user to input text
-        exs (list[str]): list of example strings
-        ex_names (list[str]): the names the client will see
+        name (str): The title the user sees for this widget
+        text_input (bool): Allow the user to input text
+        exs (list[str]): List of example strings
+        ex_names (list[str]): The names for the texts that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Text&#34;,
                  text_input=True,
@@ -295,31 +298,31 @@ class Text(Widget):
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
 <dd>The title of this widget</dd>
 <dt><strong><code>camera</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to take pictures</dd>
+<dd>Allow the user to take pictures</dd>
 <dt><strong><code>image_upload</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow user to upload images</dd>
+<dd>Allow user to upload images</dd>
 <dt><strong><code>image_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of file paths to images</dd>
+<dd>List of file paths to images</dd>
 <dt><strong><code>image_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>List of names the client will see</dd>
 <dt><strong><code>text_input</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input text</dd>
+<dd>Allow the user to input text</dd>
 <dt><strong><code>text_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of example strings</dd>
+<dd>List of example strings</dd>
 <dt><strong><code>text_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>the names the client will see</dd>
+<dd>The names the client will see</dd>
 <dt><strong><code>option_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of options. "Options" differ from "texts"
+<dd>List of options. "Options" differ from "texts"
 in that they won't be previewed to the client</dd>
 <dt><strong><code>option_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>List of names the client will see</dd>
 <dt><strong><code>boolean</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input a boolean</dd>
+<dd>Allow the user to input a boolean</dd>
 <dt><strong><code>slider</code></strong> :&ensp;<code>tuple</code></dt>
-<dd>tuple (min, max, increment) so for instance (0,1,.1)
+<dd>Tuple (min, max, increment) so for instance (0,1,.1)
 would allow the user to choose 0, 0.1, 0.2, &hellip;, 1.0.</dd>
 <dt><strong><code>slider_default</code></strong> :&ensp;<code>float</code></dt>
-<dd>the initial position of the slider</dd>
+<dd>The initial position of the slider</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
@@ -329,20 +332,20 @@ would allow the user to choose 0, 0.1, 0.2, &hellip;, 1.0.</dd>
     Args:
         var (str): The function variable name this widget represents
         name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        image_list (list[str]): list of file paths to images
-        image_names (list[str]): list of names the client will see
-        text_input (bool): allow the user to input text
-        text_list (list[str]): list of example strings
-        text_names (list[str]): the names the client will see
-        option_list (list[str]): list of options. &#34;Options&#34; differ from &#34;texts&#34;
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        image_list (list[str]): List of file paths to images
+        image_names (list[str]): List of names the client will see
+        text_input (bool): Allow the user to input text
+        text_list (list[str]): List of example strings
+        text_names (list[str]): The names the client will see
+        option_list (list[str]): List of options. &#34;Options&#34; differ from &#34;texts&#34;
             in that they won&#39;t be previewed to the client
-        option_names (list[str]): list of names the client will see
-        boolean (bool): allow the user to input a boolean
-        slider (tuple): tuple (min, max, increment) so for instance (0,1,.1)
+        option_names (list[str]): List of names the client will see
+        boolean (bool): Allow the user to input a boolean
+        slider (tuple): Tuple (min, max, increment) so for instance (0,1,.1)
             would allow the user to choose 0, 0.1, 0.2, ..., 1.0.
-        slider_default (float): the initial position of the slider
+        slider_default (float): The initial position of the slider
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Widget&#34;,
                  camera=False,

@@ -1,3 +1,7 @@
+"""
+.. include:: ../README.md
+"""
+
 from .server import show
 from .widgets import Widget, Text, Image
 from .__version__ import __version__

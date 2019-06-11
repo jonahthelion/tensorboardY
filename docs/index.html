@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.2" />
 <title>tensorboardY API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="tensorboardY
+The goal of this library is to accelerate ML research by making it as easy as possible to demo ML algorithms in the browser. The easier …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -20,9 +21,67 @@
 <h1 class="title">Module <code>tensorboardY</code></h1>
 </header>
 <section id="section-intro">
+<h1 id="tensorboardy">tensorboardY</h1>
+<p>The goal of this library is to accelerate ML research by making it as easy as possible to demo ML algorithms in the browser. The easier it is to interact with ML models, the faster we can determine their current limitations.</p>
+<p>This library seeks to automate the creation of cool ML demo websites like</p>
+<ul>
+<li><a href="http://megadepthdemo.pythonanywhere.com/">Megadepth</a></li>
+<li><a href="https://talktotransformer.com/?ref=producthunt">Talk to transformer</a></li>
+<li><a href="http://gltr.io/dist/index.html">GLTR</a></li>
+<li><a href="http://perception.wayve.ai/">Wayve demo</a></li>
+<li><a href="https://nvlabs.github.io/FUNIT/petswap.html">FUNIT</a></li>
+</ul>
+<h2 id="install">Install</h2>
+<p><code>pip install tensorboardY</code></p>
+<h2 id="examples">Examples</h2>
+<ul>
+<li><code>python examples/simple_example.py</code></li>
+</ul>
+<pre><code>import tensorboardY as ty
+import matplotlib.pyplot as plt
+
+def forward(x, title):
+    plt.imshow(x)
+    plt.title(title)
+    return plt.gcf()
+
+inputs = [ty.Image(var='x', exs=['imgs/curve.jpg']),
+          ty.Text(var='title', exs=[&quot;EXAMPLE&quot;])]
+
+ty.show(forward, inputs)
+</code></pre>
+<p><img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/simple_example_site.png" width="800" /></p>
+<ul>
+<li><code>python examples/full_example.py</code></li>
+</ul>
+<pre><code>import tensorboardY as ty
+import os
+
+def forward(z):
+    return z
+
+inputs = [ty.Widget(&quot;z&quot;, name=&quot;Choose your input&quot;,
+                    camera=True,
+                    image_upload=True,
+                    image_list=['imgs/curve.jpg'], image_names=['Curve example'],
+                    text_input=True,
+                    text_list=['This is an example text!'], text_names=['Random'],
+                    option_list=[&quot;This is an example option!&quot;], option_names=['Resnet50'],
+                    boolean=True,
+                    slider=(5, 20, 0.5), slider_default=10.3)]
+
+ty.show(forward, inputs)
+</code></pre>
+<p><img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/full_example_site.png" width="800" /></p>
+<h1 id="documentation">Documentation</h1>
+<p>Documentation generated using <a href="https://pdoc3.github.io/pdoc/">pdoc3</a></p>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">from .server import show
+<pre><code class="python">&#34;&#34;&#34;
+.. include:: ../README.md
+&#34;&#34;&#34;
+
+from .server import show
 from .widgets import Widget, Text, Image
 from .__version__ import __version__
 
@@ -59,30 +118,35 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
 <span>def <span class="ident">show</span></span>(<span>forward, inputs, port=5000, debug=True, title='Run')</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Starts a server at the given port displaying the function "forward".</p>
+<section class="desc"><p>Starts a server at <code>port</code> that visualizes the function <code>forward</code>.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>forward</code></strong> :&ensp;<code>callable</code></dt>
-<dd>The function to be displayed</dd>
+<dd>The function to be visualized</dd>
 <dt><strong><code>inputs</code></strong> :&ensp;<code>list</code></dt>
-<dd>Representation of the client form</dd>
-<dt>port (int, optional) : The port where the model is served</dt>
-<dt><strong><code>debug</code></strong> :&ensp;<code>title</code>, optional</dt>
+<dd>List of <code>ty.Widget</code>s (one <code>ty.Widget</code> for each argument
+to <code>forward</code>) that dictate how the user is able to feed inputs
+to the function</dd>
+<dt><strong><code>port</code></strong> :&ensp;<code>int</code></dt>
+<dd>The port where the model is served</dd>
+<dt><strong><code>debug</code></strong> :&ensp;<code>bool</code></dt>
 <dd>Run the server in debug mode</dd>
-<dt><strong><code>title</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Title to put at the top of the site</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
+<dd>Submit button text</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;):
     r&#34;&#34;&#34;
-    Starts a server at the given port displaying the function &#34;forward&#34;.
+    Starts a server at `port` that visualizes the function `forward`.
     Args:
-        forward (callable): The function to be displayed
-        inputs (list): Representation of the client form
-        port (int, optional) : The port where the model is served
-        debug (title, optional): Run the server in debug mode
-        title (str, optional): Title to put at the top of the site
+        forward (callable): The function to be visualized
+        inputs (list): List of `ty.Widget`s (one `ty.Widget` for each argument
+            to `forward`) that dictate how the user is able to feed inputs
+            to the function
+        port (int): The port where the model is served
+        debug (bool): Run the server in debug mode
+        title (str): Submit button text
     &#34;&#34;&#34;
     check_type(inputs, Widget, islist=True)
     check_type(title, str)
@@ -110,34 +174,36 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
 <span>(</span><span>var, name='Image', camera=True, image_upload=True, exs=[], ex_names=None, **kwargs)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>A template to build arguments that you know should always be images.</p>
+<section class="desc"><p>A template to build a <code>ty.Widget</code> for arguments that you know should
+always be images.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>var</code></strong> :&ensp;<code>str</code></dt>
-<dd>The function variable name this widget represents</dd>
+<dd>The name of the argument that this widget represents</dd>
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
-<dd>The title of this widget</dd>
+<dd>The title the user sees for this widget</dd>
 <dt><strong><code>camera</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to take pictures</dd>
+<dd>Allow the user to take pictures</dd>
 <dt><strong><code>image_upload</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow user to upload images</dd>
+<dd>Allow user to upload images</dd>
 <dt><strong><code>exs</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of file paths to images</dd>
+<dd>List of file paths to images</dd>
 <dt><strong><code>ex_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>The names for the images that the user sees</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">class Image(Widget):
     r&#34;&#34;&#34;
-    A template to build arguments that you know should always be images.
+    A template to build a `ty.Widget` for arguments that you know should
+    always be images.
     Args:
-        var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        exs (list[str]): list of file paths to images
-        ex_names (list[str]): list of names the client will see
+        var (str): The name of the argument that this widget represents
+        name (str): The title the user sees for this widget
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        exs (list[str]): List of file paths to images
+        ex_names (list[str]): The names for the images that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Image&#34;,
                  camera=True,
@@ -164,13 +230,13 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
 <dt><strong><code>var</code></strong> :&ensp;<code>str</code></dt>
 <dd>The function variable name this widget represents</dd>
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
-<dd>The title of this widget</dd>
+<dd>The title the user sees for this widget</dd>
 <dt><strong><code>text_input</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input text</dd>
+<dd>Allow the user to input text</dd>
 <dt><strong><code>exs</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of example strings</dd>
+<dd>List of example strings</dd>
 <dt><strong><code>ex_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>the names the client will see</dd>
+<dd>The names for the texts that the user sees</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
@@ -179,10 +245,10 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
     A template to build arguments that you know should always be text.
     Args:
         var (str): The function variable name this widget represents
-        name (str): The title of this widget
-        text_input (bool): allow the user to input text
-        exs (list[str]): list of example strings
-        ex_names (list[str]): the names the client will see
+        name (str): The title the user sees for this widget
+        text_input (bool): Allow the user to input text
+        exs (list[str]): List of example strings
+        ex_names (list[str]): The names for the texts that the user sees
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Text&#34;,
                  text_input=True,
@@ -210,31 +276,31 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
 <dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
 <dd>The title of this widget</dd>
 <dt><strong><code>camera</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to take pictures</dd>
+<dd>Allow the user to take pictures</dd>
 <dt><strong><code>image_upload</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow user to upload images</dd>
+<dd>Allow user to upload images</dd>
 <dt><strong><code>image_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of file paths to images</dd>
+<dd>List of file paths to images</dd>
 <dt><strong><code>image_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>List of names the client will see</dd>
 <dt><strong><code>text_input</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input text</dd>
+<dd>Allow the user to input text</dd>
 <dt><strong><code>text_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of example strings</dd>
+<dd>List of example strings</dd>
 <dt><strong><code>text_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>the names the client will see</dd>
+<dd>The names the client will see</dd>
 <dt><strong><code>option_list</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of options. "Options" differ from "texts"
+<dd>List of options. "Options" differ from "texts"
 in that they won't be previewed to the client</dd>
 <dt><strong><code>option_names</code></strong> :&ensp;<code>list</code>[<code>str</code>]</dt>
-<dd>list of names the client will see</dd>
+<dd>List of names the client will see</dd>
 <dt><strong><code>boolean</code></strong> :&ensp;<code>bool</code></dt>
-<dd>allow the user to input a boolean</dd>
+<dd>Allow the user to input a boolean</dd>
 <dt><strong><code>slider</code></strong> :&ensp;<code>tuple</code></dt>
-<dd>tuple (min, max, increment) so for instance (0,1,.1)
+<dd>Tuple (min, max, increment) so for instance (0,1,.1)
 would allow the user to choose 0, 0.1, 0.2, &hellip;, 1.0.</dd>
 <dt><strong><code>slider_default</code></strong> :&ensp;<code>float</code></dt>
-<dd>the initial position of the slider</dd>
+<dd>The initial position of the slider</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
@@ -244,20 +310,20 @@ would allow the user to choose 0, 0.1, 0.2, &hellip;, 1.0.</dd>
     Args:
         var (str): The function variable name this widget represents
         name (str): The title of this widget
-        camera (bool): allow the user to take pictures
-        image_upload (bool): allow user to upload images
-        image_list (list[str]): list of file paths to images
-        image_names (list[str]): list of names the client will see
-        text_input (bool): allow the user to input text
-        text_list (list[str]): list of example strings
-        text_names (list[str]): the names the client will see
-        option_list (list[str]): list of options. &#34;Options&#34; differ from &#34;texts&#34;
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        image_list (list[str]): List of file paths to images
+        image_names (list[str]): List of names the client will see
+        text_input (bool): Allow the user to input text
+        text_list (list[str]): List of example strings
+        text_names (list[str]): The names the client will see
+        option_list (list[str]): List of options. &#34;Options&#34; differ from &#34;texts&#34;
             in that they won&#39;t be previewed to the client
-        option_names (list[str]): list of names the client will see
-        boolean (bool): allow the user to input a boolean
-        slider (tuple): tuple (min, max, increment) so for instance (0,1,.1)
+        option_names (list[str]): List of names the client will see
+        boolean (bool): Allow the user to input a boolean
+        slider (tuple): Tuple (min, max, increment) so for instance (0,1,.1)
             would allow the user to choose 0, 0.1, 0.2, ..., 1.0.
-        slider_default (float): the initial position of the slider
+        slider_default (float): The initial position of the slider
     &#34;&#34;&#34;
     def __init__(self, var, name=&#34;Widget&#34;,
                  camera=False,
@@ -407,7 +473,14 @@ would allow the user to choose 0, 0.1, 0.2, &hellip;, 1.0.</dd>
 <nav id="sidebar">
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#tensorboardy">tensorboardY</a><ul>
+<li><a href="#install">Install</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#documentation">Documentation</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>

@@ -29,7 +29,7 @@ inputs = [ty.Image(var='x', exs=['imgs/curve.jpg']),
 
 ty.show(forward, inputs)
 ```
-<img src="https://github.com/jonahthelion/tensorboardY/blob/master/imgs/simple_example_site.png" width="800" />
+<img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/simple_example_site.png" width="800" />
 
 * `python examples/full_example.py`
 
@@ -52,4 +52,7 @@ inputs = [ty.Widget("z", name="Choose your input",
 
 ty.show(forward, inputs)
 ```
-<img src="https://github.com/jonahthelion/tensorboardY/blob/master/imgs/full_example_site.png" width="800" />
+<img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/full_example_site.png" width="800" />
+
+# Documentation
+Documentation generated using [pdoc3](https://pdoc3.github.io/pdoc/)
