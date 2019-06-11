@@ -4,6 +4,26 @@ from .tools import check_type, pil_to_b64, b64_to_pil
 
 
 class Widget(object):
+    r"""
+    Base class for function input forms.
+    Args:
+        var (str): The function variable name this widget represents
+        name (str): The title of this widget
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        image_list (list[str]): List of file paths to images
+        image_names (list[str]): List of names the client will see
+        text_input (bool): Allow the user to input text
+        text_list (list[str]): List of example strings
+        text_names (list[str]): The names the client will see
+        option_list (list[str]): List of options. "Options" differ from "texts"
+            in that they won't be previewed to the client
+        option_names (list[str]): List of names the client will see
+        boolean (bool): Allow the user to input a boolean
+        slider (tuple): Tuple (min, max, increment) so for instance (0,1,.1)
+            would allow the user to choose 0, 0.1, 0.2, ..., 1.0.
+        slider_default (float): The initial position of the slider
+    """
     def __init__(self, var, name="Widget",
                  camera=False,
                  image_upload=False,
@@ -98,6 +118,17 @@ class Widget(object):
 
 
 class Image(Widget):
+    r"""
+    A template to build a `ty.Widget` for arguments that you know should
+    always be images.
+    Args:
+        var (str): The name of the argument that this widget represents
+        name (str): The title the user sees for this widget
+        camera (bool): Allow the user to take pictures
+        image_upload (bool): Allow user to upload images
+        exs (list[str]): List of file paths to images
+        ex_names (list[str]): The names for the images that the user sees
+    """
     def __init__(self, var, name="Image",
                  camera=True,
                  image_upload=True,
@@ -109,6 +140,15 @@ class Image(Widget):
 
 
 class Text(Widget):
+    r"""
+    A template to build arguments that you know should always be text.
+    Args:
+        var (str): The function variable name this widget represents
+        name (str): The title the user sees for this widget
+        text_input (bool): Allow the user to input text
+        exs (list[str]): List of example strings
+        ex_names (list[str]): The names for the texts that the user sees
+    """
     def __init__(self, var, name="Text",
                  text_input=True,
                  exs=[], ex_names=None, **kwargs):

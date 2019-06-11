@@ -49,7 +49,18 @@ class MainHandler(web.RequestHandler):
                 self.send_error()
 
 
-def show(forward, inputs, port=9988, debug=True, title='Run'):
+def show(forward, inputs, port=5000, debug=True, title='Run'):
+    r"""
+    Starts a server at `port` that visualizes the function `forward`.
+    Args:
+        forward (callable): The function to be visualized
+        inputs (list): List of `ty.Widget`s (one `ty.Widget` for each argument
+            to `forward`) that dictate how the user is able to feed inputs
+            to the function
+        port (int): The port where the model is served
+        debug (bool): Run the server in debug mode
+        title (str): Submit button text
+    """
     check_type(inputs, Widget, islist=True)
     check_type(title, str)
     assert(callable(forward)), '{} is not callable'.format(forward)
