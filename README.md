@@ -55,3 +55,5 @@ inputs = [ty.Widget("z", name="Choose your input",
 ty.show(forward, inputs)
 ```
 <img src="https://github.com/jonahthelion/tensorboardY/raw/master/imgs/full_example_site.png" width="800" />
+
+* Live example displaying Yolact [here](https://silly-y2uuxajhsq-uc.a.run.app/)
