@@ -77,7 +77,8 @@ def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;):
     r&#34;&#34;&#34;
     Starts a server at `port` that visualizes the function `forward`.
     Args:
-        forward (callable): The function to be visualized
+        forward (callable): The function to be visualized. `forward` should
+            return a string of html, a PIL.Image.Image, or a matplotlib figure.
         inputs (list): List of `ty.Widget`s (one `ty.Widget` for each argument
             to `forward`) that dictate how the user is able to feed inputs
             to the function
@@ -96,7 +97,7 @@ def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;):
                 &#34;path&#34;:
                 os.path.join(os.path.dirname(__file__), &#34;./frontend/&#34;)})
             ], debug=debug)
-    print(&#39;view @ localhost:{}&#39;.format(port))
+    print(&#39;view @ http://localhost:{}&#39;.format(port))
     app.listen(port)
     loop.start()</code></pre>
 </details>
@@ -116,7 +117,8 @@ def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;):
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>forward</code></strong> :&ensp;<code>callable</code></dt>
-<dd>The function to be visualized</dd>
+<dd>The function to be visualized. <code>forward</code> should
+return a string of html, a PIL.Image.Image, or a matplotlib figure.</dd>
 <dt><strong><code>inputs</code></strong> :&ensp;<code>list</code></dt>
 <dd>List of <code>ty.Widget</code>s (one <code>ty.Widget</code> for each argument
 to <code>forward</code>) that dictate how the user is able to feed inputs
@@ -134,7 +136,8 @@ to the function</dd>
     r&#34;&#34;&#34;
     Starts a server at `port` that visualizes the function `forward`.
     Args:
-        forward (callable): The function to be visualized
+        forward (callable): The function to be visualized. `forward` should
+            return a string of html, a PIL.Image.Image, or a matplotlib figure.
         inputs (list): List of `ty.Widget`s (one `ty.Widget` for each argument
             to `forward`) that dictate how the user is able to feed inputs
             to the function
@@ -153,7 +156,7 @@ to the function</dd>
                 &#34;path&#34;:
                 os.path.join(os.path.dirname(__file__), &#34;./frontend/&#34;)})
             ], debug=debug)
-    print(&#39;view @ localhost:{}&#39;.format(port))
+    print(&#39;view @ http://localhost:{}&#39;.format(port))
     app.listen(port)
     loop.start()</code></pre>
 </details>
