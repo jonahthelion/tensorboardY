@@ -364,7 +364,11 @@ function toggleFullscreen(elem) {
 }
 
 $("img").each(function ( index ) {
+  // hacky...
   let obj = this;
+  if (obj.id == 'github') {
+    return;
+  }
   obj.onclick = () => toggleFullscreen(obj);
   obj.onload = () => {
     $(obj).attr('data-original-title', `${obj.naturalHeight} x ${obj.naturalWidth}`);

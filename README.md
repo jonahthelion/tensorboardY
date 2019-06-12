@@ -1,6 +1,7 @@
 # tensorboardY
 The easier it is to interact with ML models, the faster we can determine their current limitations. This library seeks to automate the creation of cool ML demo websites like
 
+* [style transfer](https://reiinakano.github.io/arbitrary-image-stylization-tfjs/)
 * [Megadepth](http://megadepthdemo.pythonanywhere.com/)
 * [Talk to transformer](https://talktotransformer.com/?ref=producthunt)
 * [GLTR](http://gltr.io/dist/index.html)

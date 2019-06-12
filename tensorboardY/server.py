@@ -16,14 +16,15 @@ class NoCacheStaticFileHandler(web.StaticFileHandler):
 
 class MainHandler(web.RequestHandler):
 
-    def initialize(self, forward, inputs, title):
+    def initialize(self, forward, inputs, title, github_url):
         self.forward = forward
         self.inputs = inputs
         self.title = title
+        self.github_url = github_url
 
     def get(self):
         self.render("./frontend/index.html", inputs=self.inputs,
-                    title=self.title)
+                    title=self.title, github_url=self.github_url)
 
     def post(self):
         cmd = json.loads(self.request.body)
@@ -49,7 +50,8 @@ class MainHandler(web.RequestHandler):
                 self.send_error()
 
 
-def show(forward, inputs, port=5000, debug=True, title='Run'):
+def show(forward, inputs, port=5000, debug=True, title='Run',
+         github_url=None):
     r"""
     Starts a server at `port` that visualizes the function `forward`.
     Args:
@@ -61,6 +63,7 @@ def show(forward, inputs, port=5000, debug=True, title='Run'):
         port (int): The port where the model is served
         debug (bool): Run the server in debug mode
         title (str): Submit button text
+        github_url (str): url to link to a github page
     """
     check_type(inputs, Widget, islist=True)
     check_type(title, str)
@@ -68,7 +71,8 @@ def show(forward, inputs, port=5000, debug=True, title='Run'):
     loop = ioloop.IOLoop.instance()
     app = web.Application([
             (r"/", MainHandler, {'forward': forward,
-                                 'inputs': inputs, 'title': title}),
+                                 'inputs': inputs, 'title': title,
+                                 'github_url': github_url}),
             (r"/(.*)", NoCacheStaticFileHandler, {
                 "path":
                 os.path.join(os.path.dirname(__file__), "./frontend/")})

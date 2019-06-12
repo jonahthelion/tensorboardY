@@ -34,3 +34,7 @@ img:-webkit-full-screen { cursor:zoom-out; }
 img:-moz-full-screen { cursor:zoom-out; }
 img:-ms-fullscreen { cursor:zoom-out; }
 img:fullscreen { cursor:zoom-out; }
+
+#github {
+  cursor: pointer;
+}
