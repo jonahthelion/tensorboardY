@@ -53,7 +53,8 @@ def show(forward, inputs, port=5000, debug=True, title='Run'):
     r"""
     Starts a server at `port` that visualizes the function `forward`.
     Args:
-        forward (callable): The function to be visualized
+        forward (callable): The function to be visualized. `forward` should
+            return a string of html, a PIL.Image.Image, or a matplotlib figure.
         inputs (list): List of `ty.Widget`s (one `ty.Widget` for each argument
             to `forward`) that dictate how the user is able to feed inputs
             to the function
@@ -72,6 +73,6 @@ def show(forward, inputs, port=5000, debug=True, title='Run'):
                 "path":
                 os.path.join(os.path.dirname(__file__), "./frontend/")})
             ], debug=debug)
-    print('view @ localhost:{}'.format(port))
+    print('view @ http://localhost:{}'.format(port))
     app.listen(port)
     loop.start()
