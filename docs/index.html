@@ -24,6 +24,7 @@ The easier it is to interact with ML models, the faster we can determine their c
 <h1 id="tensorboardy">tensorboardY</h1>
 <p>The easier it is to interact with ML models, the faster we can determine their current limitations. This library seeks to automate the creation of cool ML demo websites like</p>
 <ul>
+<li><a href="https://reiinakano.github.io/arbitrary-image-stylization-tfjs/">style transfer</a></li>
 <li><a href="http://megadepthdemo.pythonanywhere.com/">Megadepth</a></li>
 <li><a href="https://talktotransformer.com/?ref=producthunt">Talk to transformer</a></li>
 <li><a href="http://gltr.io/dist/index.html">GLTR</a></li>
@@ -114,7 +115,7 @@ __all__ = [&#39;show&#39;, &#39;Widget&#39;, &#39;Text&#39;, &#39;Image&#39;, &#
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="tensorboardY.show"><code class="name flex">
-<span>def <span class="ident">show</span></span>(<span>forward, inputs, port=5000, debug=True, title='Run')</span>
+<span>def <span class="ident">show</span></span>(<span>forward, inputs, port=5000, debug=True, title='Run', github_url=None)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Starts a server at <code>port</code> that visualizes the function <code>forward</code>.</p>
@@ -133,10 +134,13 @@ to the function</dd>
 <dd>Run the server in debug mode</dd>
 <dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
 <dd>Submit button text</dd>
+<dt><strong><code>github_url</code></strong> :&ensp;<code>str</code></dt>
+<dd>url to link to a github page</dd>
 </dl></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;):
+<pre><code class="python">def show(forward, inputs, port=5000, debug=True, title=&#39;Run&#39;,
+         github_url=None):
     r&#34;&#34;&#34;
     Starts a server at `port` that visualizes the function `forward`.
     Args:
@@ -148,6 +152,7 @@ to the function</dd>
         port (int): The port where the model is served
         debug (bool): Run the server in debug mode
         title (str): Submit button text
+        github_url (str): url to link to a github page
     &#34;&#34;&#34;
     check_type(inputs, Widget, islist=True)
     check_type(title, str)
@@ -155,7 +160,8 @@ to the function</dd>
     loop = ioloop.IOLoop.instance()
     app = web.Application([
             (r&#34;/&#34;, MainHandler, {&#39;forward&#39;: forward,
-                                 &#39;inputs&#39;: inputs, &#39;title&#39;: title}),
+                                 &#39;inputs&#39;: inputs, &#39;title&#39;: title,
+                                 &#39;github_url&#39;: github_url}),
             (r&#34;/(.*)&#34;, NoCacheStaticFileHandler, {
                 &#34;path&#34;:
                 os.path.join(os.path.dirname(__file__), &#34;./frontend/&#34;)})
